@@ -9,7 +9,7 @@ const router = Router();
 
 router.post('/cartaodecredito', new CreateCartaoController().handle)
 router.post("/session", new AuthCartaoController().handle);
-router.get("/pay",isAuthenticated, new ValidandoCartaoController().handle
+router.get("/cartaoinfo",isAuthenticated, new ValidandoCartaoController().handle
 );
 
 export {router};

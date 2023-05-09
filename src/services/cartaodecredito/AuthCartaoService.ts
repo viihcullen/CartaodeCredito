@@ -1,4 +1,4 @@
-import { compare } from 'bcryptjs';
+import { compare, hash } from 'bcryptjs';
 import prismaClient from '../../prisma'; 
 import {sign} from 'jsonwebtoken';
 
@@ -13,6 +13,7 @@ interface AuthRequest{
 
 class AuthCartaoService {
     async execute({ numCartao, codigodeseguranca }: AuthRequest) {
+
       const cartaoCredito = await prismaClient.cartao.findFirst({
         where: {
           numCartao: numCartao,
@@ -38,7 +39,7 @@ class AuthCartaoService {
         process.env.JWT_SECRET,
         {
           subject: cartaoCredito.id,
-          expiresIn: "59s",
+          expiresIn: "1d",
         }
       );
       return {

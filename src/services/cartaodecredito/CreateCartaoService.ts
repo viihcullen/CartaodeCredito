@@ -27,14 +27,13 @@ class CreateCartaoService{
             throw new Error("Cartão já cadastrado")
         }
 
-        const senhahash = await hash(numCartao, 16)
 
         const cvc = await hash(codigodeseguranca, 3)
 
         const Cartao = await prismaClient.cartao.create({
             data:{
                 nome:nome,
-                numCartao:senhahash,
+                numCartao: numCartao,
                 codigodeseguranca: cvc,
                 datadevencimento: datadevencimento
 
